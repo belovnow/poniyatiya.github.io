@@ -82,20 +82,28 @@
 
 <script>
   const themeButtons = Array.from(document.getElementsByClassName("toggle-item"));
-  themeButtons.forEach(button => button.onclick = toggleTheme);
+  themeButtons.forEach(button => button.onclick = (el) => toggleTheme(el.target.dataset.theme));
 
-  function toggleTheme(el) {
-    const { theme } = el.target.dataset;
-    toggleActiveThemeButton(el);
+  if (localStorage.getItem("theme")) toggleTheme(localStorage.getItem("theme"))
+
+  function toggleTheme(theme) {
+    toggleActiveThemeButton(theme);
     const meta = document.querySelector('meta[name="theme-color"]');
     document.body.classList = theme;
     meta.content = getComputedStyle(document.body).getPropertyValue('--color-background');
+    saveThemeToLocalStorage(theme);
   }
 
-  function toggleActiveThemeButton(el) {
+  function toggleActiveThemeButton(theme) {
     const currentActive = document.getElementsByClassName("toggle-item_active")[0];
     currentActive.classList.toggle("toggle-item_active");
-    el.target.classList.toggle("toggle-item_active");
+
+    const newActive = document.querySelector(`[data-theme="${theme}"]`);
+    newActive.classList.toggle("toggle-item_active");
+  }
+
+  function saveThemeToLocalStorage(themeName) {
+    localStorage.setItem("theme", themeName);
   }
 </script>
 
