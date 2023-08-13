@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://poniyatiya.github.io/" />
+  <meta property="og:title" content="Понятия" />
+  <meta property="og:description"
+    content="Если ты живёшь в этой комнате, то будь добр, уважай пацанское и соблюдай нехитрые правила" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,700&family=Russo+One&display=swap"
+    rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#fff" />
+  <title>Понятия</title>
+</head>
+
+<body class="default-theme">
+  <main class="container">
+    <h1 class="page-header">Понятия</h1>
+    <nav class="mobile-nav">
+      <a class="mobile-nav__item" href="#days-order">Порядок</a>
+      <a class="mobile-nav__item" href="#schedule">Расписание</a>
+      <a class="mobile-nav__item" href="#food">Посуда</a>
+    </nav>
+    <p class="page-caption">
+      Если ты живёшь в этой комнате,<br>
+      то будь добр, уважай пацанское</span> <br> и соблюдай нехитрые правила:
+    </p>
+    <ol class="list">
+      <li id="days-order" class="list__item">
+        <div class="list__item-marker">1</div>
+        <div class="list__item-content">
+          <div class="card-title">
+            Живи по следующему порядку дней:
+          </div>
+          <div class="card-caption">
+            готовишь → убираешь стол → подметаешь пол → отдыхаешь
+          </div>
+        </div>
+      </li>
+      <li id="schedule" class="list__item">
+        <div class="list__item-marker">2</div>
+        <div class="list__item-content">
+          <div class="card-title">Тихий час с 23:00 до 7:00</div>
+          <div class="card-caption">
+            После 23:00 в комнате никого постороннего не должно быть
+          </div>
+        </div>
+      </li>
+      <li id="food" class="list__item">
+        <div class="list__item-marker">3</div>
+        <div class="list__item-content">
+          <div class="card-title">После приёма пищи твоя личная посуда должна быть помыта и убрана</div>
+          <div class="card-caption">
+            В случае несоблюдения — грязная посуда будет перемещена на кровать хозяина, ибо не должен стол трапезный в
+            захломлении находиться</div>
+        </div>
+        </div>
+      </li>
+    </ol>
+  </main>
+  <footer class="page-footer">
+    <div class="container">
+      <ul class="toggle-container">
+        <div class="toggle-item toggle-item_active" data-theme="default-theme">Стандарт</div>
+        <div class="toggle-item-divider">•</div>
+        <div class="toggle-item" data-theme="shrek-theme">Шрек</div>
+        <div class="toggle-item-divider">•</div>
+        <div class="toggle-item" data-theme="spyro-theme">Спайро</div>
+      </ul>
+    </div>
+  </footer>
+</body>
+
+<script>
+  const themeButtons = Array.from(document.getElementsByClassName("toggle-item"));
+  themeButtons.forEach(button => button.onclick = toggleTheme);
+
+  function toggleTheme(el) {
+    const { theme } = el.target.dataset;
+    toggleActiveThemeButton(el);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    document.body.classList = theme;
+    meta.content = getComputedStyle(document.body).getPropertyValue('--color-background');
+  }
+
+  function toggleActiveThemeButton(el) {
+    const currentActive = document.getElementsByClassName("toggle-item_active")[0];
+    currentActive.classList.toggle("toggle-item_active");
+    el.target.classList.toggle("toggle-item_active");
+  }
+</script>
+
+</html>
